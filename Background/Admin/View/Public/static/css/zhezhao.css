@@ -1,0 +1,45 @@
+#black_overlay
+{
+	position:fixed;
+	z-index:1000;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	filter:alpha(opacity=80);
+	opacity:0.4;
+	overflow:hidden;
+	background-color:#000;
+}
+*html
+{
+	background:url(*)fixed;
+}
+*htmlbody
+{
+	margin:0;
+	height:100%;
+}
+/*IE6*/
+*html#black_overlay
+{
+	position:absolute;
+	left:expression(documentElement.scrollLeft+documentElement.clientWidth-this.offsetWidth);
+	top:expression(documentElement.scrollTop+documentElement.clientHeight-this.offsetHeight);
+}
+#load_content
+{
+	display:none;
+	position:absolute;
+	top:90%;
+	left:40%;
+	width:200px;
+	height:50px;
+	border:16pxsolid#FFF;
+	border-bottom:none;
+	background-color:white;
+	z-index:1002;
+	overflow:auto;
+	font-size:14px;
+	font-weight:bold;
+}

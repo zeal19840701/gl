@@ -1,0 +1,42 @@
+<include file="../Apps/Home/View/Share/header.html" />
+<form action="/index.php?m=home&c=mission&a=medit" method="post" enctype="multipart/form-data">
+<table>
+<tr><td>标题</td><td><input type="text" name="missionData[title]" value=""></td></tr>
+<tr><td>介绍</td><td><input type="text" name="missionData[intro]" value=""></td></tr>
+<tr><td>奖励</td><td><input type="text" name="missionData[award]" value="30"></td></tr>
+<tr><td>份数</td><td><input type="text" name="missionData[copies]" value="50"></td></tr>
+<tr><td>开始时间</td><td><input type="text" name="missionData[start_time]" value="2017-06-20 00:00:00"></td></tr>
+<tr><td>结束时间</td><td><input type="text" name="missionData[end_time]" value="2017-07-01 00:00:00"></td></tr>
+<tr><td>城市</td><td><input type="text" name="missionData[city]" value=""></td></tr>
+<tr><td>所用设备</td><td><input type="text" name="missionData[equipment]" value=""></td></tr>
+<tr><td>total_number</td><td><input type="text" name="missionData[total_number]" value=""></td></tr>
+<tr><td>day_number</td><td><input type="text" name="missionData[day_number]" value=""></td></tr>
+<tr><td>is_equipment</td><td><input type="text" name="missionData[is_equipment]" value=""></td></tr>
+
+
+<tr><td>截图1</td><td><input type="file" name="uploadfile1[]"></td> <td>步骤1</td><td><input type="text" name="step1"></td></tr>
+<tr><td>截图1</td><td><input type="file" name="uploadfile1[]"></td> <td></td></tr>
+<tr><td>截图1</td><td><input type="file" name="uploadfile1[]"></td> <td></td></tr>
+
+
+<tr><td>截图2</td><td><input type="file" name="uploadfile2[]"></td> <td>步骤2</td><td><input type="text" name="step2"></td></tr>
+<tr><td>截图2</td><td><input type="file" name="uploadfile2[]"></td> <td></td></tr>
+<tr><td>截图2</td><td><input type="file" name="uploadfile2[]"></td> <td></td></tr>
+
+<tr><td>截图3</td><td><input type="file" name="uploadfile3[]"></td> <td>步骤3</td><td><input type="text" name="step3"></td></tr>
+<tr><td>截图3</td><td><input type="file" name="uploadfile3[]"></td> <td></td></tr>
+<tr><td>截图3</td><td><input type="file" name="uploadfile3[]"></td> <td></td></tr>
+<tr><td>userid</td><td><input type="text" name="userid" value="72f498bd-09fc-d952-c6d9-6084510101a8"></td> <td></td></tr>
+<tr><td>token</td><td><input type="text" name="token" value="0365d57ab766a0f296c843b2a5d5a9e5"></td> <td></td></tr>
+<tr><td>id</td><td><input type="text" name="id" value="{$id}"></td> <td></td></tr>
+
+
+<tr><td></td><td><input type="submit" name="submit" value="上传"></td></tr>
+
+</table>
+</form>
+<!--bottom-->
+
+<div class="h60"></div>
+
+<include file="../Apps/Home/View/Share/footer.html" />

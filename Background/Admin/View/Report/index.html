@@ -1,0 +1,75 @@
+<include file="Public/header" title="举报列表" />
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-6">
+            
+        </div>
+        <div class="col-md-6">
+            <form action="{:U('report/index')}" method="post">
+                <div class="form-group input-group">
+                    <input type="text" class="form-control" name="key" value="{$key}" placeholder="输入标题或者内容搜索" size="10" value="{$key}">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <td width="3%">编号</td>
+                <td width="5%">栏目</td>
+                <td width="7%">标题</td>
+                <td width="15%">详情链接</td>
+                <td width="10%">发布者</td>
+                <td width="10%">举报类型</td>
+                <td width="10%">举报内容</td>
+                <td width="5%">创建时间</td>
+                <td width="20%">操作</td>
+            </tr>
+        </thead>
+        <tbody>
+        <foreach name="model" item="v">
+            <tr>
+                <td>{$v.id}</td>
+                <td>{$v.part}</td>
+                <td>{$v.title}</td>
+                <td>{$v.link}</td>
+                <td>{$v.account}</td>
+                <td>{$v.type_str}</td>
+                <td>{$v.content}</td>
+                <td>{$v.cdate}</td>
+                <td>
+                <if condition="$v.status eq 0">
+                <a href="{:U('report/ignore?id=')}{$v.id}" style="color:green;" onclick="javascript:return del('您真的确定要忽略吗？');">忽略</a>&nbsp;|
+                <a href="{:U('report/pass?id=')}{$v.id}" style="color:green;" onclick="javascript:return del('您真的确定有效通过吗？');">确认</a>&nbsp;|
+                <elseif condition="$v.status eq 1" />
+               	已忽略&nbsp;|
+               	<elseif condition="$v.status eq 2" />
+               	已确认&nbsp;|
+                </if>
+                <if condition="$v.is_del eq 0">
+                <a href="{:U('report/is_del?id=')}{$v.id}" style="color:red;" onclick="javascript:return del('您真的确定要删除原文吗？\n\n删除后将不能恢复!');">删除原文</a>&nbsp;|
+                <else />
+                                        已删除原文&nbsp;|
+                </if>
+                
+                <if condition="$v.part neq 'news'">
+                <if condition="$v.is_ban eq 0">
+                <a href="{:U('report/ban?id=')}{$v.id}" style="color:red;" onclick="javascript:return del('您真的确定要禁用账号吗？');">禁用账号</a>
+                <else />
+                                        已禁用&nbsp;|
+                </if>
+                </if>
+                </td>
+            	
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+</div>
+
+<include file="Public/footer" />

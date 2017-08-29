@@ -1,0 +1,17 @@
+<include file="../Apps/Home/View/Share/header.html" />
+<form action="/index.php?m=home&c=mission&a=reupload" method="post" enctype="multipart/form-data">
+<table>
+<tr><td>任务步骤ID</td><td><input type="text" name="id" value=""></td></tr>
+
+<tr><td>截图1</td><td><input type="file" name="uploadfile[]"></td></tr>
+<tr><td>截图2</td><td><input type="file" name="uploadfile[]"></td></tr>
+<tr><td>截图3</td><td><input type="file" name="uploadfile[]"></td></tr>
+<tr><td>userid</td><td><input type="text" name="userid" value="72f498bd-09fc-d952-c6d9-6084510101a8"></td> <td></td></tr>
+<tr><td>token</td><td><input type="text" name="token" value="491d6b663ff0bb8a55224f60687f8632"></td> <td></td></tr>
+<tr><td></td><td><input type="submit" name="submit" value="上传"></td></tr>
+</table>
+</form>
+<!--bottom-->
+<div class="h60"></div>
+
+<include file="../Apps/Home/View/Share/footer.html" />

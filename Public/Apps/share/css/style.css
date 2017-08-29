@@ -1,0 +1,193 @@
+@charset "utf-8";
+body {
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: #333;
+	background-color:#f9f9f9;
+}
+img {
+	border-width: 0;
+}
+body, h1, h2, h3, h4, h5, h6, dl, dt, dd, p, ul, ol, form, input, textarea, pre, figure {
+	margin: 0;
+	padding: 0;
+}
+ul {
+	list-style-type: none;
+}
+i, em, cite {
+	font-style:normal;
+}
+a {
+	text-decoration:none;
+}
+.middle {
+	position:relative;
+	margin:0 auto;
+	max-width:640px;
+	min-width:320px;
+}
+.bg1 {
+	background-image:url(../images/bg3.gif);
+	height:21.42em;
+	width:100%;
+	float:left;
+	background-repeat:repeat-x;
+}
+.bg1 .cat {
+	width:3.2em;
+	height:3.53em;
+	position:absolute;
+	left:2.5em;
+	top:1.2em;
+	background-image:url(../images/cat.png);
+	background-size:3.15em 3.53em;
+}
+.bg1 .text1 {
+	float:left;
+	width:9.39em;
+	height:3.28em;
+	margin:2em 0 0.25em 6em;
+	background-image:url(../images/text1.png);
+	background-size:9.39em 3.28em;
+}
+.bg1 p {
+	float:left;
+	width:100%;
+	font-size:0.75em;
+	line-height:1.8em;
+	text-indent:8em;
+}
+.bg1 .text2 {
+	float:left;
+	width:11em;
+	height:1.46em;
+	margin:1.3em 0 0.5em 6em;
+	background-image:url(../images/text2.png);
+	background-size:11em 1.46em;
+}
+.bg2 {
+	background-image:url(../images/bg4.gif);
+	background-repeat:repeat-x;
+	width:100%;
+	float:left;
+	padding-bottom:1.5em;
+}
+.bg2 h1 {
+	float:left;
+	font-size:1.28em;
+	font-weight:normal;
+	margin:1.3em 0 0 4.5em;
+}
+.bg2 dl {
+	float:left;
+	margin:0.8em 0 0 3em;
+}
+.bg2 dl dt {
+	float:left;
+	width:1.89em;
+	height:1.89em;
+	background-image:url(../images/icon.png);
+	background-size:3.78em 3.78em;
+}
+.bg2 dl .icon1 {
+	background-position:left top;
+}
+.bg2 dl .icon2 {
+	background-position:right top;
+}
+.bg2 dl .icon3 {
+	background-position:left bottom;
+}
+.bg2 dl .icon4 {
+	background-position:right bottom;
+}
+.bg2 dl dd {	
+	float:left;
+	width:13.57em;
+	margin:0 0 0 0.7em;
+}
+.bg2 dl dd em {
+	font-size:0.85em;
+}
+.bg2 dl dd p {
+	font-size:0.75em;
+	color:#888;
+	float:left;
+	width:100%;
+	line-height:1.6em;
+}
+.bg2 dl dd p cite {
+	color:#ffa431;
+}
+#div_center {
+	position:relative;
+}
+#div_yqm {
+	color:#F00;
+	text-align:center;
+}
+#div_yqm em {
+	font-size: 1.25em;
+}
+#div_yqm cite {
+	font-size: 1.75em;
+}
+#div_bb {
+	color:#865802;
+    font-size: 1em;
+	text-align:center;
+}
+dialog {
+	width:100%;
+	padding:0.5em 0;
+	line-height:1.5em;
+	background-color:#FFF;
+	display:block;
+	position:fixed;
+	left:0;
+	top:0.78em;
+	z-index:3;
+}
+dialog i {
+	width:1.21em;
+	height:0.78em;
+	background-image:url(../images/jiao.png);
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-size:1.21em 0.78em;
+	position:absolute;
+	top:-0.78em;
+	right:1em;
+}
+dialog p {
+	margin:0 0.75em;
+}
+dialog p img {
+	width: 0.22em;
+	height: 1em;
+	vertical-align: -10%;
+	margin-left:0.5em;
+}
+.bg {
+	background-color: #000;
+	width:100%;
+	height:100%;
+	position:fixed;
+	z-index:2;
+	left:0;
+	top:0;
+	filter:alpha(opacity=50);
+	opacity: 0.5;
+}
+@media screen and (min-width:480px) {
+body {
+	font-size: 21px;
+}
+}
+
+@media screen and (min-width:640px) {
+body {
+	font-size: 28px;
+}
+}

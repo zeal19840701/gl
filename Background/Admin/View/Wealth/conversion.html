@@ -1,0 +1,294 @@
+<include file="Public/header" title="提现管理" />
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- <a href="{:U('category/add')}" class="btn btn-success">添加分类</a> -->
+        </div>
+        <div class="col-md-6">
+            <form action="{:U('wealth/conversion')}" method="post">
+                <div class="form-group input-group">
+                    <input type="text" class="form-control" name="key" placeholder="输入用户或者兑换账号或者兑换姓名搜索" value="{$key}">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+            	<th>选择</th>							
+                <th>用户</th>
+                <th>兑换时间</th>
+                <th>兑换账号</th>
+                <th>兑换姓名</th>
+                <th>兑换途径</th>
+                <th>兑换金币</th>
+                <th>兑换金额</th>
+                <th>是否删除</th>
+                <th>兑换状态</th>
+                <th>操作</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        <foreach name="model" item="v">
+            <tr>
+            	<td><input type="checkbox" name="conversionids" value="{$v.id}"></td>
+	            <td>{$v.mobile}</td>
+	            <td>{$v.exchange_date}</td>
+	            <td>{$v.exchange_account}</td>
+	            <td>{$v.exchange_name}</td>
+	            <td>
+	            	<if condition="$v.exchange_channel eq 1">
+	            	支付宝
+	            	<elseif condition="$v.exchange_channel eq 2" />
+	            	微信
+	            	<elseif condition="$v.exchange_channel eq 3" />
+	            	话费
+	            	<else />
+	            	流量
+	            	</if>
+		        </td>
+	            <td>{$v.exchange_gold}</td>
+	            <td>{$v.exchange_money}</td>
+	            <td>
+					<if condition="$v.is_del eq 0">
+		            	正常
+		            <else />
+		            	删除
+		            </if>
+				</td>
+	            <td>
+		            <if condition="$v.status eq 0">
+		            	待审核
+		            <elseif condition="$v.status eq 1" />
+		           		 已审核
+		            <elseif condition="$v.status eq 2" />
+		            	拒绝
+		            <elseif condition="$v.status eq 3" />
+		            	支付中
+		            <elseif condition="$v.status eq 4" />
+		            	已兑换
+		            <elseif condition="$v.status eq 5" />
+		            	兑换失败
+		            <else />
+		            	冻结
+		            </if>
+	            </td>
+	            <td>
+	            <if condition="$v.status eq 0 AND $v.is_del eq 0">
+	            	<a href="javascript:;" onclick="freeze('<?=$v['id']?>','<?=U('admin/wealth/pass');?>', '<p>你确定要审核通过？</p>');">审核通过</a> | <a href="javascript:;" onclick="freeze('<?=$v['id']?>','<?=U('admin/wealth/refuse');?>', '<p>你确定要拒绝？</p>');">拒绝</a>
+	            <elseif condition="$v.status eq 1 AND $v.is_del eq 0" />
+	            	<a href="javascript:;" onclick="if(confirm('确认支付吗？')){checkzf('<?=$v['id']?>','<?=$v['mobile']?>','<?=U('admin/wealth/alipay');?>','<?=$qStr?>');};return false;">支付</a>
+	            </if>
+	            <if condition="$v.status eq 3">
+	            	<a href="javascript:;" onclick="freeze('<?=$v['id']?>','<?=U('admin/wealth/reset');?>', '<p>你确定要重置？</p>');">reset</a>
+	            </if>
+	            <if condition="$v.status eq 0 or $v.status eq 1 or $v.status eq 3">
+	             | 
+	            </if>
+	            <if condition="$v.status neq 6">
+	            	<a href="javascript:;" onclick="freeze('<?=$v['id']?>','<?=U('admin/wealth/freeze');?>', '<p>你确定要冻结？</p>');">冻结</a> | 
+	            </if>
+	            <if condition="$v.is_del eq 0">
+	            	<a href="javascript:;" onclick="isdel('<?=$v['id']?>','<?=U('admin/wealth/isdel');?>');">删除</a>
+	            <else />
+	            	<a href="javascript:;" onclick="recover('<?=$v['id']?>','<?=U('admin/wealth/recover');?>');">恢复</a>
+	            </if>
+	            
+	            
+	            
+	            
+	            <!-- <if condition="($v.status eq '0' OR  $v.status eq '1') AND ($v.is_del eq 0)">
+	            	<a href="javascript:;" onclick="if(confirm('确认支付吗？')){checkzf('<?=$v['id']?>','<?=$v['mobile']?>','<?=U('admin/wealth/alipay');?>','<?=$qStr?>');};return false;">
+	            	支付
+	            	</a>&nbsp;
+	            </if>
+	            <if condition="$v.status neq '2' &&  $v.status neq '3'">
+	            <a href="javascript:;" onclick="cancellation('<?=$v['id']?>','<?=U('admin/wealth/cancellation');?>');">作废</a>&nbsp;
+	            <else />
+	            <a href="javascript:;" onclick="lation('<?=$v['id']?>','<?=U('admin/wealth/lation');?>');">生效</a>&nbsp;
+	            </if>
+	            <if condition="$v.is_del eq 0">
+	            <a href="javascript:;" onclick="isdel('<?=$v['id']?>','<?=U('admin/wealth/isdel');?>');">删除</a>
+	            <else />
+	            <a href="javascript:;" onclick="recover('<?=$v['id']?>','<?=U('admin/wealth/recover');?>');">恢复</a>
+	            </if> -->
+	            </td>
+            </tr>
+        </foreach>
+        </tbody>
+        
+        <tr bgcolor="#FFFFFF" align="left">
+        	<td colspan="6">总计</td>
+			<td colspan="1">{$getIdGoldSum}</td>
+			<td colspan="4">{$getIdMoneySum}</td>
+		</tr>
+        <tr bgcolor="#FFFFFF" align="left">
+			<td colspan="11">
+			<input type="button" name = 'zf' id = 'zf' value="批量支付" onclick="if(confirm('确定批量支付吗？')){checkMultiAnswer('<?=U('admin/wealth/alipay_multi');?>', '<?=$qStr?>');}" />
+			</td>
+		</tr>
+    </table>
+    <div></div>
+    <div style="text-align:center">{$page}</div>
+</div>
+
+<script type="text/javascript">
+
+function checkzf(id,accountID,site_url,query_string) {
+		Tips.confirm({
+			define: '完成',
+			cancel: '遇到问题',
+			content: '<h3>支付中</h3><p>支付完成请刷新页面</p>',
+			after: function(b){
+				if(b){
+					window.reload();
+				}
+				
+			}
+		});
+	window.open(site_url + '&id='+id+'&qStr='+query_string);
+}
+
+function checkMultiAnswer(site_url, query_string) {
+	var id_str = '';
+	/*$("input[name='ids']").each(function(){console.log($(this).attr("checked"));
+		if($(this).attr("checked")){alert(2);
+			id_str += ($(this).val()+',');
+		}
+		
+	});*/
+	var vl = '';
+	var groupCheckbox = $("input[name='conversionids']");
+	for(i=0;i<groupCheckbox.length;i++){
+		if(groupCheckbox[i].checked){
+			vl = groupCheckbox[i].value;
+			id_str += vl + ',';
+		}
+	}
+	alert(id_str);
+	if(id_str == '') {
+		alert("请至少选择一条兑换记录！");
+		return false;
+	}
+	Tips.confirm({
+		define: '完成',
+		cancel: '遇到问题',
+		content: '<h3>支付中</h3><p>支付完成请刷新页面</p>',
+		after: function(b){
+			if(b){
+				location.reload();
+			}
+			
+		}
+	});
+	window.open(site_url + '&ids='+id_str+'&qStr='+query_string);
+}
+//作废
+function cancellation(id, site_url){
+	Tips.confirm({
+		define: '确定',
+		cancel: '取消',
+		content: '<p>你确定要作废？</p>',
+		after: function(b){
+			if(b){
+				$.ajax({
+					type:"GET",
+					url:site_url + "&id="+id,
+					dataType:"html",
+					success:function(o){
+						location.reload();
+					}
+				});
+			}
+			
+		}
+	});
+}
+
+//冻结
+function freeze(id, site_url, content){
+	Tips.confirm({
+		define: '确定',
+		cancel: '取消',
+		content: content,
+		after: function(b){
+			if(b){
+				$.ajax({
+					type:"GET",
+					url:site_url + "&id="+id,
+					dataType:"html",
+					success:function(o){
+						location.reload();
+					}
+				});
+			}
+			
+		}
+	});
+}
+function lation(id, site_url){
+	Tips.confirm({
+		define: '确定',
+		cancel: '取消',
+		content: '<p>你确定要生效？</p>',
+		after: function(b){
+			if(b){
+				$.ajax({
+					type:"GET",
+					url:site_url + "&id="+id,
+					dataType:"html",
+					success:function(o){
+						location.reload();
+					}
+				});
+			}
+			
+		}
+	});
+}
+function isdel(id, site_url){
+	Tips.confirm({
+		define: '确定',
+		cancel: '取消',
+		content: '<p>你确定要删除？</p>',
+		after: function(b){
+			if(b){
+				$.ajax({
+					type:"GET",
+					url:site_url + "&id="+id,
+					dataType:"html",
+					success:function(o){
+						location.reload();
+					}
+				});
+			}
+			
+		}
+	});
+}
+function recover(id, site_url){
+	Tips.confirm({
+		define: '确定',
+		cancel: '取消',
+		content: '<p>你确定要恢复？</p>',
+		after: function(b){
+			if(b){
+				$.ajax({
+					type:"GET",
+					url:site_url + "&id="+id,
+					dataType:"html",
+					success:function(o){
+						location.reload();
+					}
+				});
+			}
+			
+		}
+	});
+}
+</script>
+<include file="Public/footer" />

@@ -1,0 +1,19 @@
+@charset "utf-8";
+.w1400{
+	width: 90%;
+	max-width: 1400px;
+	margin: 0 auto;
+}
+.w1142{
+	width: 80%;
+	max-width: 1142px;
+	margin: 0 auto;
+}
+.oft{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+html,body{
+	background: #eaeaea;
+}

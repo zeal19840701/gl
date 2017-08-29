@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>新闻详情</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC_APPS__/css/newsShow.css?ver=7">
+    <style>
+    	a{
+    		text-decoration:none;
+    		color:#000000;
+    	}
+    </style>
+</head>
+<body>
+    <div id="mainBody">
+        <div class="section1">
+            <h1>{$newsInfo.title}</h1>
+        </div>
+        <div class="section2 clearfix">
+            <span>{$newsInfo.publish_time|substr=0,16} </span>
+            <span>来源：{$newsInfo.source}</span>
+        </div>
+    </div>
+    <div id="article" class="">
+        <div class="article" id="article_img">
+        {$newsInfo.content}
+        </div>
+        <div class="btn" id="show_read">展开阅读全文</div>
+        <h2>猜你喜欢</h2>
+    </div>
+    <div id="graTxt">
+    	<volist name="likeInfo" id="vo">
+        <dl class="clearfix">
+            <dt class="left">
+                <a href="{$GL_HOST_URL.config.GL_HOST_URL}/index.php?&m=Home&c=News&a=detail&id={$vo.id}"><img src="{$vo.thumbnail}"></a>
+            </dt>
+            <dd class="right">
+                <h3><a href="{$GL_HOST_URL.config.GL_HOST_URL}/index.php?&m=Home&c=News&a=detail&id={$vo.id}">{$vo.title}</a></h3>
+                <p> <span><img src="__PUBLIC_APPS__/images/news/detail/toutiao.png"></span>{$vo.public_number} / {$vo.comment_num}评 / 9分钟前</p>
+            </dd>
+        </dl>
+        </volist>
+    </div>
+    
+    <script type="text/javascript" src='__PUBLIC_APPS__/js/jquery.min.js'></script>
+    <script type="text/javascript" src="__PUBLIC_APPS__/js/newsShow.js"></script>
+    <script type="text/javascript">
+    var sw = window.screen.width;
+    var percent = 1;
+    $(document).ready(function(){
+    	$("#article_img").css('height', Math.ceil(sw * 0.9));
+    	$("#article_img").css('overflow', 'hidden');
+    	$("#show_read").click(function(){
+        	if($("#article_img").height() == Math.ceil(sw * 0.9)){
+        		$("#article_img").css('height', '');
+            	$("#show_read").html("隐藏阅读全文");
+        	}else{
+        		$("#article_img").css('height', Math.ceil(sw * 0.9));
+            	$("#show_read").html("显示阅读全文");
+        	}
+        });
+    });
+ 	// 新增-- 使用js控制外围的宽
+    var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    var mainBody = $('#mainBody');
+    var article = $('#article');
+    var graTxt = $('#graTxt');
+    mainBody.css('width',w);
+    article.css('width',w);
+    graTxt.css('width',w);
+    
+    var mobile = '{$mobile}'; //模拟数据
+    var mobile_width = '{$mobile_width}';
+    var mobile_height = '{$mobile_height}';
+    
+    if (mobile === 'SM-G9300') {
+
+        var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        var mainBody = $('#mainBody');
+        var section1 = $('#mainBody .section1');
+        var article = $('#article');
+        var graTxt = $('#graTxt');
+        var article_img = $('#article_img');
+        // dl
+        var gra_txt_dl = $('#graTxt dl');
+        // dt
+        var gra_txt_dt = $('#graTxt dl dt');
+        var gra_txt_a = $('#graTxt dl dt a');
+        var gra_txt_img = $('#graTxt dl dt a img');
+        // dd
+        var gra_txt_dd = $('#graTxt dl dd');
+
+        // 新增-- 使用js控制外围的宽
+        mainBody.css('width',w);
+        article.css('width',w);
+        graTxt.css('width',w);
+
+        // section1
+        section1.css({'width':'336px','minHeight':'48px'});
+
+        // 控制article
+        article_img.css({'width':'346px'});
+
+        gra_txt_dl.css({'marginLeft':'9px','marginBottom':'8px'});
+        // dt
+        gra_txt_dt.css({'width':'120px','height':'82px'});
+        gra_txt_a.css({'display':'inline-block'});
+        gra_txt_img.css({'width':'120px','height':'82px'});
+        
+        // dd
+        gra_txt_dd.css({'width':'210px','height':'82px','float':'left','marginLeft':'18px','marginTop':'2px'});
+    }
+
+    </script>
+</body>
+</html>

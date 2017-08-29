@@ -1,0 +1,65 @@
+<include file="Public/header" title="消息列表" />
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{:U('message/add')}" class="btn btn-success">添加</a>
+        </div>
+        <div class="col-md-6">
+            <form action="{:U('message/index')}" method="post">
+                <div class="form-group input-group">
+                	<select name="type">
+                		<option value="" <if condition="$type eq ''">selected="selected"</if> >所有</option>
+                		<option value="1" <if condition="$type eq 1">selected="selected"</if> >个人消息</option>
+                		<option value="2" <if condition="$type eq 2">selected="selected"</if> >系统消息</option>
+                	</select>
+                    <input type="text" class="form-control" name="key" value="{$key}" placeholder="输入标题或者内容搜索" size="10" value="{$key}">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <td>编号</td>
+                <td>类型</td>
+                <td>收信者</td>
+                <td>标题</td>
+                <td>内容</td>
+                <td>跳转链接</td>
+                <td>创建时间</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+        <foreach name="message" item="v">
+            <tr>
+                <td>{$v.id}</td>
+                <td>
+                <if condition="$v.info_type eq 1"> <span class="label label-success">个人消息</span>
+                    <elseif condition="$v.info_type eq 2"/><span class="label label-danger">系统消息</span>
+                    </if>
+                </td>
+                <td>{$v.receiver}</td>
+                <td>{$v.info_title}</td>
+                <td>{$v.info_content}</td>
+                <td>{$v.link}</td>
+                <td>{$v.create_date}</td>
+                <!-- <td><if condition="$v.status eq 1">正常<else/><span style="color:red">禁用</span></if></td> -->
+                
+                <td>
+                <a href="{:U('message/update?id=')}{$v.id}" >编辑</a> | 
+                <a href="{:U('message/delete?id=')}{$v.id}" style="color:red;" onclick="javascript:return del('您确定要删除吗？');">删除</a></td>
+            	
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div align="center">{$page}</div>
+</div>
+
+<include file="Public/footer" />

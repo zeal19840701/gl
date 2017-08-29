@@ -1,0 +1,141 @@
+<include file="Public/header" title="采集列表" />
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- <a href="{:U('category/add')}" class="btn btn-success">添加分类</a> -->
+        </div>
+        <div class="col-md-6">
+            <form action="{:U('grab/index')}" method="post">
+                <div class="form-group input-group">
+                    <input type="text" class="form-control" name="key" placeholder="输入标题或者内容搜索" value="{$key}">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+            	<th>选择</th>
+                <th>编号</th>
+                <th>标题</th>
+                <th>内容</th>
+                <th>发布时间</th>
+                <th>入库时间</th>
+                <th>发布者</th>
+                <th>文章来源</th>
+                <th>二维码图片</th>
+                <th>公众号</th>
+                <th>阅读数</th>
+                <th>文章类型</th>
+                <th>功能介绍</th>
+                <th>是否原创</th>
+                <th>栏目</th>
+                <th>缩略图地址</th>
+            </tr>
+        </thead>
+        <tbody>
+        <foreach name="model" item="v">
+            <tr>
+            	<td><input type="checkbox" name="chk_list" value="{$v.checkkey}"></td>
+	            <td>{$v.checkkey|msubstr=0,6}</td>
+	            <td>{$v.title|msubstr=0,15}</td>
+	            <td>{$v.content|msubstr=0,20}</td>
+	            <td>{$v.publishtime}</td>
+	            <td>{$v.storagetime}</td>
+	            <td>{$v.release_person}</td>
+	            <td>{$v.source}</td>
+	            <td>{$v.qr_code|msubstr=0,15}</td>
+	            <td>{$v.public_number}</td>
+	            <td>{$v.reading_number}</td>
+	            <td>{$v.article_type}</td>
+	            <td>{$v.function_introduction|msubstr=0,15}</td>
+	            <td>{$v.original}</td>
+	            <td>{$v.column_type}</td>
+	            <td>{$v.thumbnail|msubstr=0,15}</td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div><input type="button" value="全选" id="btn1" onclick="allSelect()" />&nbsp;&nbsp;&nbsp;<input id="btn2" type="button" value="反选" onclick="otherSelect();" />&nbsp;&nbsp;&nbsp;<input id="btn3" type="button" value="推送" onclick="push();" />&nbsp;&nbsp;&nbsp;<input id="btn3" type="button" value="自动推送" onclick="autopush();" /></div>
+    <div style="text-align:center">{$page}</div>
+</div>
+
+<script type="text/javascript">
+function allSelect(){
+	if ($("input[name='chk_list']").prop("checked") != true) {
+        $("input[name='chk_list']").prop("checked",true);
+        $("#btn1").val('全不选');
+    }else{
+        $("input[name='chk_list']").removeAttr("checked");
+        $("#btn1").val('全选');
+    }
+}
+function otherSelect(){
+	$("input[name='chk_list']").each(function () {
+        if ($(this).prop("checked") == true) {
+            $(this).removeAttr("checked");
+        }else{
+            $(this).prop("checked", true);
+        }
+    });
+}
+//推送
+function push(){
+	var mypush = new Array();
+	$("input[name='chk_list']").each(function () {
+		if($(this).prop("checked") == true){
+			mypush.push($(this).val());
+		}
+	});
+	if(mypush.length>0){
+		var ajaxbg = $("#black_overlay,#load_content");
+		$("#load_text").html("数据推送中，你稍后…");
+		ajaxbg.show();
+		$.ajax({
+			type:"POST",
+			url:"{:U('grab/push')}",
+			data:{'mypush':mypush},
+			dataType:'json',
+			success:function(o){
+				ajaxbg.hide();
+				if(o.status){
+					alert(o.msg);
+					location.reload();
+				}else{
+					alert(o.msg);
+				}
+			}
+		});
+	}else{
+		alert("请选择编号!");
+	}
+}
+
+function autopush(){
+	var r = confirm("自动推送可能会慢，你确定要执行吗？");
+	if(r){
+		var ajaxbg = $("#black_overlay,#load_content");
+		$("#load_text").html("数据推送中，你稍后…");
+		ajaxbg.show();
+		$.ajax({
+			type:"POST",
+			url:"{:U('grab/autopush')}",
+			dataType:'json',
+			success:function(o){
+				ajaxbg.hide();
+				if(o.status){
+					alert(o.msg);
+					location.reload();
+				}else{
+					alert(o.msg);
+				}
+			}
+		});
+	}
+	
+}
+</script>
+<include file="Public/footer" />

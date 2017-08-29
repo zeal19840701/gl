@@ -1,0 +1,99 @@
+<include file="Public/header" title="{$title}" />
+<!--大图-->
+<div class="j_d_banner"></div>
+<div class="j_status">
+	<h2>金锁动态<hr/></h2>
+	<ul class="trends clearfix" id="j_item">
+		<volist name="news_list" id="vo">
+		<li>
+			<img src="{$vo.img}">
+			<div class="inf_pic">
+				<h3>{$vo.title}</h3>
+               	<p>{$vo.intro}</p>
+               	<a href="{:U('Index/newsdetail')}&id={$vo.id}">→查看详细</a>
+            </div>
+        </li>
+        </volist>
+	</ul>
+	<div class="j_pagination">
+		{$page}
+	</div>
+</div>
+<script type="text/javascript">
+    (function(){
+        /*var picItem = [
+                {
+                    pic:"n_db.jpg",
+                    tit:"动动手指，轻松赚钱",
+                    inf:"利用您碎片化时间，每天只需轻轻点击，按要求操作，就可赚取推广（试用）奖励；"
+                },{
+                    pic:"p_li_02.jpg",
+                    tit:"动动手指，轻松赚钱",
+                    inf:"利用您碎片化时间，每天只需轻轻点击，按要求操作，就可赚取推广（试用）奖励；"
+                },{
+                    pic:"p_li_03.jpg",
+                    tit:"动动手指，轻松赚钱",
+                    inf:"利用您碎片化时间，每天只需轻轻点击，按要求操作，就可赚取推广（试用）奖励；"
+                },{
+                    pic:"p_li_04.jpg",
+                    tit:"动动手指，轻松赚钱",
+                    inf:"利用您碎片化时间，每天只需轻轻点击，按要求操作，就可赚取推广（试用）奖励；"
+                },{
+                    pic:"p_li_05.jpg",
+                    tit:"动动手指，轻松赚钱",
+                    inf:"利用您碎片化时间，每天只需轻轻点击，按要求操作，就可赚取推广（试用）奖励；"
+                },{
+                    pic:"p_li_06.jpg",
+                    tit:"动动手指，轻松赚钱",
+                    inf:"利用您碎片化时间，每天只需轻轻点击，按要求操作，就可赚取推广（试用）奖励；"
+                },{
+                    pic:"p_li_07.jpg",
+                    tit:"动动手指，轻松赚钱",
+                    inf:"利用您碎片化时间，每天只需轻轻点击，按要求操作，就可赚取推广（试用）奖励；"
+                },{
+                    pic:"p_li_08.jpg",
+                    tit:"动动手指，轻松赚钱",
+                    inf:"利用您碎片化时间，每天只需轻轻点击，按要求操作，就可赚取推广（试用）奖励；"
+                },{
+                    pic:"p_li_09.jpg",
+                    tit:"动动手指，轻松赚钱",
+                    inf:"利用您碎片化时间，每天只需轻轻点击，按要求操作，就可赚取推广（试用）奖励；"
+                },{
+                    pic:"p_li_010.jpg",
+                    tit:"动动手指，轻松赚钱",
+                    inf:"利用您碎片化时间，每天只需轻轻点击，按要求操作，就可赚取推广（试用）奖励；"
+                },{
+                    pic:"p_li_011.jpg",
+                    tit:"动动手指，轻松赚钱",
+                    inf:"利用您碎片化时间，每天只需轻轻点击，按要求操作，就可赚取推广（试用）奖励；"
+                },{
+                    pic:"p_li_012.jpg",
+                    tit:"动动手指，轻松赚钱",
+                    inf:"利用您碎片化时间，每天只需轻轻点击，按要求操作，就可赚取推广（试用）奖励；"
+                }
+            ],
+            initHTML = '';
+        for(var i = 0; i < picItem.length; i++){
+            initHTML+='<li>' +
+                '<img src="img/'+ picItem[i].pic +'">' +
+                '<div class="inf_pic">' +
+                '<h3>'+ picItem[i].tit +'</h3>' +
+                '<p>'+ picItem[i].inf +'</p>' +
+                '<a href="javascript:;">→查看详细</a>' +
+                '</div>' +
+                '</li>'
+        }*/
+
+        //$("#j_item").html(initHTML);
+        $("#j_item").on('click','li',function(){
+            $(this).siblings('li').removeClass('active');
+            $(this).addClass('active');
+        });
+
+        $("#nav_list").on('click','li',function(){
+            $(this).siblings('li').removeClass('active');
+            $(this).addClass('active');
+        });
+    })()
+</script>
+<include file="Public/footer" />

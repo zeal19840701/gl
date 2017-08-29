@@ -1,0 +1,148 @@
+<?php
+namespace Admin\Controller;
+use Admin\Controller;
+/**
+ * 新闻管理
+ */
+class NewsController extends BaseController
+{
+    /**
+     * 分类列表
+     * @return [type] [description]
+     */
+    public function index()
+    {
+    	$param = array();
+    	$key = I("key");//传入key值
+    	$p = $_GET['p'];
+    	$listRows = 20;
+    	$where = array();
+    	//$where['flag'] = 0;//1表示插入过数据。0表示没有
+        if($key === ""){
+            //$model = D('Acquisition');
+        	$param['where'] = $where;
+        }else{
+            $where['title'] = array('like',"%$key%");
+            // $where['name'] = array('like',"%$key%");
+            //$where['_logic'] = 'or';
+            $param['where'] = $where;
+            //$model = D('Acquisition')->where($where); 
+        }
+        
+        $model = D('News');
+        $total = $model->getCount($param['where']);
+        $page = new \Admin\Common\Page($total, $listRows, array('key'=>$key));// 加载分页类
+        $param['limit'] = $p * $listRows;
+        $getIdArr = $model->getList(array('field'=>'id', 'limit'=>$param['limit'] . "," . $listRows));
+        $getIdList = array();
+        if($getIdArr){
+        	foreach($getIdArr as $k=>$v){
+        		$getIdList[] = $v['id'];
+        	}
+        	$param['where']['id'] = array('in', $getIdList);
+        	$newsList = $model->getList($param);
+        }
+        if($newsList){
+        	foreach($newsList as $k=>$v){
+        		$newsList[$k]['content'] = strip_tags($v['content']);
+        		$newsList[$k]['original'] = $v['original']==1?'原创':'非原创';
+        	}
+        }else{
+        	$newsList = array();
+        }
+        
+        
+        $show = $page->show();
+        $this->assign('model', $newsList);
+        $this->assign('page', $show);
+        $this->assign('key', $key);
+        $this->display();
+    }
+
+    /**
+     * 添加分类
+     */
+    public function add()
+    {
+        //默认显示添加表单
+        if (!IS_POST) {
+            $model = M('category')->select();
+            $cate = getSortedCategory($model);
+
+            $this->assign('cate',$cate);
+            $this->display();
+        }
+        if (IS_POST) {
+            //如果用户提交数据
+            $model = D("Category");
+            if (!$model->create()) {
+                // 如果创建失败 表示验证没有通过 输出错误提示信息
+                $this->error($model->getError());
+                exit();
+            } else {
+
+                if ($model->add()) {
+                    $this->success("分类添加成功", U('category/index'));
+                } else {
+                    $this->error("分类添加失败");
+                }
+            }
+        }
+    }
+    /**
+     * 更新分类信息
+     * @param  [type] $id [分类ID]
+     * @return [type]     [description]
+     */
+    public function update()
+    {
+        //默认显示添加表单
+        if (!IS_POST) {
+            $model = M('category')->find(I('id',"addslashes"));
+          
+            $this->assign('cate',getSortedCategory(M('category')->select()));
+            $this->assign('model',$model);
+            $this->display();
+        }
+        if (IS_POST) {
+            $model = D("Category");
+            if (!$model->create()) {
+                $this->error($model->getError());
+            }else{
+             //   dd(I());die;
+                if ($model->save()) {
+                    $this->success("分类更新成功", U('category/index'));
+                } else {
+                    $this->error("分类更新失败");
+                }        
+            }
+        }
+    }
+    /**
+     * 删除分类
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function delete($id)
+    {
+    		$id = intval($id);
+        $model = M('category');
+        //查询属于这个分类的文章
+        $posts = M('post')->where("cate_id= %d",$id)->select();
+        if($posts){
+            $this->error("禁止删除含有文章的分类");
+        }
+        //禁止删除含有子分类的分类
+        $hasChild = $model->where("pid= %d",$id)->select();
+        if($hasChild){
+            $this->error("禁止删除含有子分类的分类");
+        }
+        //验证通过
+        $result = $model->delete($id);
+        if($result){
+            $this->success("分类删除成功", U('category/index'));
+        }else{
+            $this->error("分类删除失败");
+        }
+    }
+}

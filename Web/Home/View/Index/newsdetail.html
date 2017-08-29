@@ -1,0 +1,13 @@
+<include file="Public/header" title="{$title}" />
+<!--大图-->
+<div class="j_d_banner"></div>
+<!--详细信息-->
+
+<div class="w1142 new_d">
+	<h2>{$news_info.title}</h2>
+	<div class="sub_tit"><span>来 源：{$news_info.source}   </span><span>发布时间：{$news_info.release_time|date="Y-m-d",###}</span><span>点击次数：{$news_info.num}</span></div>
+	{$news_info.content|htmlspecialchars_decode}
+</div>
+<script type="text/javascript">
+</script>
+<include file="Public/footer" />

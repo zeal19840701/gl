@@ -1,0 +1,33 @@
+<include file="../Apps/Home/View/Share/header.html" />
+<form action="/index.php?m=home&c=recommend&a=publish" method="post">
+<table>
+<tr><td>推荐短语</td><td><input type="text" name="publishData[phrase]" value=""></td></tr>
+<tr><td>内容链接url</td><td><input type="text" name="publishData[link]" value=""></td></tr>
+<tr><td>推荐分类</td><td>
+<select name="publishData[category]">
+	<option value="ZH">综合</option>
+	<option value="SX">时讯</option>
+	<option value="CJ">财经</option>
+	<option value="KJ">科技</option>
+	<option value="YL">娱乐</option>
+	<option value="LY">旅游</option>
+	<option value="SH">生活</option>
+	<option value="JY">教育</option>
+	<option value="CY">创业</option>
+	<option value="JK">健康</option>
+</select>
+</td></tr>
+<tr><td>奖励金额</td><td><input type="text" name="publishData[award]" value="50"></td></tr>
+<tr><td>奖励份数</td><td><input type="text" name="publishData[copies]" value="50"></td></tr>
+<tr><td>开始时间</td><td><input type="text" name="publishData[start_time]" value="2017-06-01 00:00:00"></td></tr>
+<tr><td>结束时间</td><td><input type="text" name="publishData[end_time]" value="2017-07-01 00:00:00"></td></tr>
+<tr><td>类型</td><td><input type="text" name="publishData[type]" value="1"></td></tr>
+<tr><td>userid</td><td><input type="text" name="userid" value="72f498bd-09fc-d952-c6d9-6084510101a8"></td> <td></td></tr>
+<tr><td>token</td><td><input type="text" name="token" value="1e1a2e6287cb0e6e0142922a07c2bc18"></td> <td></td></tr>
+<tr><td></td><td><input type="submit" name="submit" value="上传"></td></tr>
+</table>
+</form>
+<!--bottom-->
+<div class="h60"></div>
+
+<include file="../Apps/Home/View/Share/footer.html" />

@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<!--关闭电话号码识别-->  
+<meta name="format-detection" content="telephone=no">
+<title>金锁</title>
+<link href="/Apps/share/css/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/Apps/share/js/js.js"></script>
+</head>
+
+<body>
+<dialog id="dialogContent" style="display:none"><i></i><p style="color:#00F;">★微信提示★</p><p>请点击右上角<img src="/Apps/share/images/dian.png">，选择“在浏览器中打开”，即可下载体验。</p></dialog>
+<div   id="dialogDiv" class="bg" style="display:none" onclick="closedialog()"></div>
+<img id="bgPic" style="width:100%; float:left;" src="/Apps/share/images/bg1.gif">
+<div id="div_yqm" href="#" style="position:absolute;z-index:999;"><if condition="$invitedcode neq ''">邀请码：{$invitedcode}</if></div>
+<a id="div_center" href="{$downfile}" style="position:absolute; z-index:1;" <if condition="$iswx eq true">onclick="show_wx_tips()"</if>></a>
+<div id="div_bb" href="#" style="position:absolute;z-index:1;">Android 版本：{$android_version}</div>
+<img src="/Apps/share/images/bg2.gif" style="width:100%; float:left;">
+<div class="bg1">
+<div class="middle">
+<span class="cat"></span>
+<span class="text1"></span>
+<p>安装金锁，选择自己喜欢的壁纸{$iswx}</p>
+<p>使用24小时即可获得金币。</p>
+<p>还可以通过赚外快，</p>
+<p>参与各种任务获取更多金币……</p>
+<span class="text2"></span>
+<p>每天算完成1个任务，</p>
+<p>轻松赚取现金，每天十分钟赚足电话费。</p>
+<p>还可以，</p>
+<p>使用金币兑换日渐丰富的各种商品。</p>
+</div>
+</div>
+<div class="bg2">
+<div class="middle">
+<h1>关于我们</h1>
+<dl style="margin-top:0.5em;"><dt class="icon1"></dt><dd><em>上海珍岛成立于2005年</em><p>专注于网络营销技术、产品、服务的创新与整合，现已成为中国领先的整合网络营销服务提供商。</p></dd></dl>
+<dl><dt class="icon2"></dt><dd><em>整合网络资源，技术驱动营销</em><p>2011年联合成立了"复旦-珍岛联合实验室"既"珍岛整合网络营销研究院"。</p></dd></dl>
+<dl><dt class="icon3"></dt><dd><em>手机端应用开发</em><p>我们希望通过我们的产品和服务可以让人们的生活变得更加高效和便捷。</p></dd></dl>
+<dl><dt class="icon4"></dt><dd><em>联系我们</em><p>地址：上海市虹口区水电路682号 天虹商务大厦6F、7F</p><p>公司网址：<cite>www.trueland.net</cite></p><p>全国售前热线：400-011-2158</p><p>全国售前热线：400-011-2158</p><p>全国售后热线：400-880-0762</p></dd></dl>
+</div>
+</div>
+
+<script language="javascript">
+function show_wx_tips(){
+	// alert("下载操作在微信中无法使用，请选择菜单中的\"在浏览器中打开\",然后再尝试进行下载！");
+	var trObj = document.getElementById('dialogContent');
+	var trceng = document.getElementById('dialogDiv');
+	trObj.style.display="";
+	trceng.style.display="";
+	return ;
+}
+function closedialog(){
+	// alert("下载操作在微信中无法使用，请选择菜单中的\"在浏览器中打开\",然后再尝试进行下载！");
+	var trObj = document.getElementById('dialogContent');
+	var trceng = document.getElementById('dialogDiv');
+	trObj.style.display="none";
+	trceng.style.display="none";
+	return ;
+}
+
+//window.onload=function()
+//{
+ // show_wx_tips();
+//}
+</script>
+</body>
+</html>

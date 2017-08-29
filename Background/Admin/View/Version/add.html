@@ -1,0 +1,37 @@
+<include file="Public/header" title="添加版本" />
+<div id="page-wrapper">
+<form action="{:U('version/add')}" method="post">
+	<div class="form-group">
+		<label>版本名称</label>
+		<input class="form-control" type="text" name="title" placeholder="版本名称">
+	</div>
+	<div class="form-group">
+		<label>版本号</label>
+		<input class="form-control" type="text" name="value" placeholder="版本号">
+	</div>
+	<div class="form-group">
+		<label>版本内容</label>
+		<input class="form-control" type="text" name="body" placeholder="版本内容">
+	</div>
+	<div class="form-group">
+		<label>升级比例</label>
+		<input class="form-control" type="text" name="proportion" placeholder="升级比例">
+	</div>
+	<div class="form-group">
+        <label>是否必需</label>
+        <label class="radio-inline">
+          <input type="radio" name="necessary" id="necessary" value="0" checked="checked">否
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="necessary" id="necessary" value="1">是
+        </label>
+    </div>
+	<div class="form-group">
+		<button class="btn btn-success" type="submit" >添加</button>
+	</div>
+
+
+</form>
+</div>
+
+<include file="Public/footer" />

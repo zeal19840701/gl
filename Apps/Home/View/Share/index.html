@@ -1,0 +1,62 @@
+<include file="../Apps/Home/View/Share/header.html" />
+<style>
+</style>
+<div class="content_box">
+	<h1 class="n_tit f22">{$rs.title}</h1>
+	<p class="n_date f888">{$rs.create_time|substr=0,10}</p>
+	<div class="main_txt">{$rs.content}</div>
+	<p class="mt10"><a href="javascript:;" class="c_blue">阅读原文</a></p>
+	<div class="related_box">
+	<if condition="$rs.addition_type eq 1">
+	<!-- <iframe align="center" width="100%" height="270" src="{$recUrl}"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> -->
+	<canvas id='label' width='100px' height='100px' style='border: solid black 0px;'></canvas>
+	<elseif condition="$rs.addition_type eq 2">
+	</else />
+	</if>
+	</div>
+</div>
+<!--bottom-->
+
+<div class="h60"></div>
+<script type="text/javascript" src="/Apps/js/label.js?ver=7"></script>
+<script>
+	
+	//document.body.insertAdjacentHTML("beforeEnd", myCanvas);
+		var label = new label("label", true);
+		var data = <?php echo json_encode($data);?>;
+		var data=eval(data);
+		function makedata() {
+			var text = data["text"]?data["text"]:"";
+			var fonttype = data["fonttype"];
+			var fontsize = data["fontsize"];
+			var color = data["color"]?data["color"]:"FF0000";
+			var bold = data["bold"]?data["bold"]:"";
+			var oblique = data["oblique"]?data["oblique"]:"";
+			var linewidth = data["linewidth"]?data["linewidth"]:0;
+			var strokecolor = data["strokecolor"]?data["strokecolor"]:"";
+			var gradient = data["gradient"];
+			var gradientstart = data["gradientstart"];
+			var gradientend = data["gradientend"];
+			var shadow = data["shadow"];
+			var shadowcolor = data["shadowcolor"];
+			var shadowblur = data["shadowblur"];
+			var shadowx = data["shadowx"];
+			var shadowy = data["shadowy"];
+			var spacing = data["spacing"];
+			var linespacing = data["linespacing"];
+			var vertical = data["vertical"];
+			var showtextbr = text.split("%0D%0A");
+			if(showtextbr.length>1){
+				var al = new Array();
+				for(var i=0;i<showtextbr.length;i++){
+					if(showtextbr[i] != ''){
+						al.push(showtextbr[i]);
+					}
+				}
+				text = al;
+			}
+			label.makeData(text, fonttype, fontsize, color, bold, oblique, linewidth, strokecolor, gradient, gradientstart, gradientend, shadow, shadowcolor, shadowblur, shadowx, shadowy, spacing, linespacing, vertical);
+		}
+		makedata();
+	</script>
+<include file="../Apps/Home/View/Share/footer.html" />

@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<script type="text/javascript" src="/Apps/js/label.js?ver=6"></script>
+	<style>
+	*{
+        margin:0;
+        padding:0;
+        margin-top:10px;
+    }
+	</style>
+	</head>
+	<body></body>
+	<script>
+	var myCanvas = "<canvas id='label' width='" + screen.availWidth + "px' height='"+ screen.availHeight + "px' style='border: solid black 0px;'></canvas>";
+	document.body.insertAdjacentHTML("beforeEnd", myCanvas);
+		var label = new label("label", true);
+		var data = <?php echo json_encode($data);?>;
+		var data=eval(data);
+		function makedata() {
+			var text = data["text"]?data["text"]:"";
+			var fonttype = data["fonttype"];
+			var fontsize = data["fontsize"];
+			var color = data["color"]?data["color"]:"FF0000";
+			var bold = data["bold"]?data["bold"]:"";
+			var oblique = data["oblique"]?data["oblique"]:"";
+			var linewidth = data["linewidth"]?data["linewidth"]:0;
+			var strokecolor = data["strokecolor"]?data["strokecolor"]:"";
+			var gradient = data["gradient"];
+			var gradientstart = data["gradientstart"];
+			var gradientend = data["gradientend"];
+			var shadow = data["shadow"];
+			var shadowcolor = data["shadowcolor"];
+			var shadowblur = data["shadowblur"];
+			var shadowx = data["shadowx"];
+			var shadowy = data["shadowy"];
+			var spacing = data["spacing"];
+			var linespacing = data["linespacing"];
+			var vertical = data["vertical"];
+			var showtextbr = text.split("%0D%0A");
+			if(showtextbr.length>1){
+				var al = new Array();
+				for(var i=0;i<showtextbr.length;i++){
+					if(showtextbr[i] != ''){
+						al.push(showtextbr[i]);
+					}
+				}
+				text = al;
+			}
+			label.makeData(text, fonttype, fontsize, color, bold, oblique, linewidth, strokecolor, gradient, gradientstart, gradientend, shadow, shadowcolor, shadowblur, shadowx, shadowy, spacing, linespacing, vertical);
+		}
+		makedata();
+	</script>
+
+</html>

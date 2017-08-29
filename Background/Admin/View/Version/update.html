@@ -1,0 +1,38 @@
+<include file="Public/header" title="修改版本" />
+<div id="page-wrapper">
+<form action="{:U('version/update')}" method="post">
+	<div class="form-group">
+		<label>版本名称</label>
+		<input class="form-control" type="text" name="title" placeholder="版本名称" value="{$model.title}">
+	</div>
+	<div class="form-group">
+		<label>版本号</label>
+		<input class="form-control" type="text" name="value" placeholder="版本号" value="{$model.value}">
+	</div>
+	<div class="form-group">
+		<label>版本内容</label>
+		<input class="form-control" type="text" name="body" placeholder="版本内容" value="{$model.body}">
+	</div>
+	<div class="form-group">
+		<label>升级比例</label>
+		<input class="form-control" type="text" name="proportion" placeholder="升级比例" value="{$model.proportion}">
+	</div>
+	<div class="form-group">
+        <label>是否必需</label>
+        <label class="radio-inline">
+          <input type="radio" name="necessary" id="necessary" value="0" <if condition="$model.necessary eq '0'">checked="checked"</if>>否
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="necessary" id="necessary" value="1" <if condition="$model.necessary eq '1'">checked="checked"</if>>是
+        </label>
+    </div>
+	<div class="form-group">
+		<input type="hidden" name="id" value="{$model.id}">
+		<button class="btn btn-success" type="submit" >更新</button>
+	</div>
+
+
+</form>
+</div>
+
+<include file="Public/footer" />

@@ -1,0 +1,19 @@
+<include file="../Apps/Home/View/Share/header.html" />
+<div class="content_box">
+	<h1 class="n_tit f22">{$rs.title}</h1>
+	<p class="n_date f888">{$rs.create_time|substr=0,10}</p>
+	<div class="main_txt">{$rs.content}</div>
+	<p class="mt10"><a href="javascript:;" class="c_blue">阅读原文</a></p>
+	<div class="related_box">
+	<if condition="$rs.addition_type eq 1">
+	<iframe id="iframeId" name="ifrName" align="center" width="100%" height="470" src="{$recUrl}" frameborder=0 scrolling="auto" onload="document.all['ifrName'].style.height=ifrName.document.body.scrollHeight"></iframe>
+	<elseif condition="$rs.addition_type eq 2">
+	</else />
+	</if>
+	</div>
+</div>
+<!--bottom-->
+
+<div class="h60"></div>
+
+<include file="../Apps/Home/View/Share/footer.html" />
