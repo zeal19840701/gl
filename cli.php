@@ -41,7 +41,7 @@ define('APP_PATH', dirname(__FILE__) . '/Cli/');
 
 //采用CLI运行模式运行 
 define('MODE_NAME', 'cli');
-
+//加载极光推送
 require 'vendor/autoload.php';
 
 define('TMPL_CACHE_ON', false);
